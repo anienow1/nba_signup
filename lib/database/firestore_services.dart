@@ -7,7 +7,7 @@ class FirestoreDatabase {
   FirestoreDatabase._privateConstructor();
 
   final CollectionReference _eventCollection = FirebaseFirestore.instance
-      .collection('event');
+      .collection('nba');
 
   Future<String> insertEvent(Event event) async {
     final docRef = await _eventCollection.add(event.toMap());

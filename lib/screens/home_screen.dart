@@ -6,7 +6,6 @@ import 'package:boom_signup/utils.dart';
 import 'package:boom_signup/widgets/delete_confirmation_popup.dart';
 import 'package:boom_signup/widgets/info_popup.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:boom_signup/widgets/date_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -42,6 +41,12 @@ class _HomeScreenState extends State<HomeScreen> {
     final weekdayEvents = await Future.wait(
       weekdays.map((day) => getDate(day, dbEvents)),
     );
+
+    for (Event event in dbEvents) {
+      if (!(weekdayEvents.contains(event)) && event.id != null) {
+        FirestoreDatabase.instance.deleteEvent(event.id!);
+      }
+    }
 
     hasNoEntries = true;
     for (Event event in weekdayEvents) {
@@ -104,12 +109,12 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        children: [
-          Image.asset(("lib/assets/add-icon.png"), width: 16, height: 16),
+        children: [ //
+          Image.asset(("lib/assets/basketball.png"), width: 20, height: 20),
           SizedBox(width: AppPadding.normal),
           Text('Signup (Click Here)', style: AppTextStyles.appBarButton),
           SizedBox(width: AppPadding.normal),
-          Image.asset(("lib/assets/add-icon.png"), width: 16, height: 16),
+          Image.asset(("lib/assets/basketball.png"), width: 20, height: 20),
         ],
       ),
     );
@@ -134,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
         top: AppPadding.extraSmall,
       ),
       child: Text(
-        "Boom Signup",
+        "NBA Signup",
         style: AppTextStyles.mainTitle.copyWith(color: AppColors.white),
         textAlign: .center,
       ),

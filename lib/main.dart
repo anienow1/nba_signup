@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Boom Signup',
+      title: 'NBA Signup',
       theme: AppTheme.theme,
       home: const HomeScreen(),
       debugShowCheckedModeBanner: false,
